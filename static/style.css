@@ -1,0 +1,276 @@
+/* ============== THEME ============== */
+:root{
+  --bg-1:#0f1220;
+  --bg-2:#151b2e;
+  --card:#1b2237;
+  --card-2:#1e2742;
+  --accent:#3b82f6;         /* primary brand-ish */
+  --accent-2:#22d3ee;       /* secondary for gradient */
+  --send:#ffb900;           /* your existing yellow */
+  --text:#e8edf7;
+  --muted:#a6b0c3;
+  --bot:#2a6df6;            /* bot bubble base */
+  --user:#259e6b;           /* user bubble base */
+}
+
+/* ============== BASE ============== */
+html, body{
+  height:100%;
+  margin:0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:var(--text);
+  background: radial-gradient(1200px 800px at 10% -10%, rgba(59,130,246,.20), transparent 40%),
+              radial-gradient(1000px 900px at 110% 10%, rgba(34,211,238,.18), transparent 45%),
+              linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  background-attachment: fixed;
+}
+
+/* Subtle animated sheen */
+@media (prefers-reduced-motion: no-preference){
+  body{
+    background-size: 120% 120%;
+    animation: bg-pan 18s ease-in-out infinite alternate;
+  }
+  @keyframes bg-pan{
+    to{ background-position: 20% 10%, 80% 20%, 100% 100%; }
+  }
+}
+
+.chat{ margin:auto; }
+
+/* ============== CARD ============== */
+.card{
+  height: 560px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--card), var(--card-2));
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.03);
+  overflow: hidden;
+}
+
+/* Header & Footer */
+.card-header,
+.card-footer{
+  background: linear-gradient(90deg, rgba(59,130,246,.25), rgba(34,211,238,.25));
+  border: none;
+  padding: .9rem 1rem;
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+.card-header{
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.card-footer{
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+/* Header content */
+.card-header .user_info span{
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing:.2px;
+}
+.card-header .user_info p{
+  font-size: .85rem;
+  color: rgba(255,255,255,.75);
+  margin-bottom: 0;
+}
+
+.user_info{ margin-left: 10px; }
+
+/* Avatar + online indicator */
+.user_img, .user_img_msg{
+  height: 44px; width: 44px; border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,.9);
+  box-shadow: 0 4px 16px rgba(59,130,246,.25);
+}
+.img_cont{ position: relative; margin-right: 10px; }
+
+.online_icon{
+  position:absolute; bottom:0; right:0;
+  height: 12px; width: 12px; border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #1b2237;
+  box-shadow: 0 0 0 2px rgba(34,197,94,.25);
+}
+
+/* ============== MESSAGE AREA ============== */
+.msg_card_body{
+  background: linear-gradient(180deg, #121729, #141a30 40%, #111627);
+  padding: 1rem 1rem 1.25rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+.msg_card_body::-webkit-scrollbar{ width: 10px; }
+.msg_card_body::-webkit-scrollbar-track{ background: transparent; }
+.msg_card_body::-webkit-scrollbar-thumb{
+  background: rgba(148,163,184,.25);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.msg_card_body:hover::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.5); }
+
+/* Bubbles */
+.msg_cotainer,
+.msg_cotainer_send{
+  max-width: 72%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  position: relative;
+  word-wrap: break-word;
+  font-size: .95rem;
+  line-height: 1.45;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+
+/* Bot bubble */
+.msg_cotainer{
+  margin-left: 10px;
+  background: linear-gradient(180deg, var(--bot), #1e4ddc);
+  color:#fff;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+/* User bubble */
+.msg_cotainer_send{
+  margin-right: 10px;
+  margin-left: auto;
+  background: linear-gradient(180deg, var(--user), #1d7b53);
+  color:#fff;
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+/* Bubble tails */
+.msg_cotainer::after,
+.msg_cotainer_send::after{
+  content:"";
+  position:absolute;
+  bottom:-6px;
+  width:12px; height:12px;
+  transform: rotate(45deg);
+  filter: brightness(.95);
+}
+.msg_cotainer::after{
+  left:16px;
+  background: linear-gradient(180deg, var(--bot), #1e4ddc);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  border-left: 1px solid rgba(255,255,255,.08);
+}
+.msg_cotainer_send::after{
+  right:16px;
+  background: linear-gradient(180deg, var(--user), #1d7b53);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-right: 1px solid rgba(255,255,255,.06);
+}
+
+/* Time stamps */
+.msg_time,
+.msg_time_send {
+    position: absolute;
+    bottom: -24px;   /* keeps it slightly below bubble */
+    font-size: 0.75rem;
+    color: var(--muted);
+    white-space: nowrap;
+    margin-top: 6px; /* 👈 adds spacing above the time */
+}
+
+.msg_time{ left: 2px; }
+.msg_time_send{ right: 2px; }
+
+/* Slight pop-in for new messages (optional, no motion if reduced) */
+@media (prefers-reduced-motion: no-preference){
+  .msg_cotainer, .msg_cotainer_send{
+    animation: pop .18s ease-out both;
+  }
+  @keyframes pop{
+    from{ transform: translateY(6px) scale(.98); opacity:.0; }
+    to{ transform: translateY(0) scale(1); opacity:1; }
+  }
+}
+
+/* ============== INPUT AREA ============== */
+.input-group{ display:flex; width:100%; gap:.5rem; }
+
+.type_msg{
+  background: #1b2237;
+  border: 1px solid rgba(255,255,255,.08);
+  color: #fff !important;
+  height: 50px;
+  padding: 12px 14px;
+  border-radius: 12px 0 0 12px;
+  caret-color: var(--send);
+  box-shadow: inset 0 0 0 1px transparent, 0 2px 10px rgba(0,0,0,.18);
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.type_msg::placeholder{ color:#9aa7bd; }
+.type_msg:focus{
+  outline: none;
+  background:#202948;
+  border-color: rgba(59,130,246,.45);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.25);
+}
+
+/* Send button */
+.send_btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.5rem;
+  background: linear-gradient(180deg, #ffd166, var(--send));
+  color: #161616;
+  border: none;
+  padding: 0 18px;
+  border-radius: 0 12px 12px 0;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing:.2px;
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+  box-shadow: 0 8px 18px rgba(255,185,0,.25), inset 0 -2px 0 rgba(0,0,0,.15);
+}
+.send_btn:hover{ filter: brightness(.98); box-shadow: 0 10px 22px rgba(255,185,0,.32); }
+.send_btn:active{ transform: translateY(1px); }
+
+/* Make the FontAwesome arrow rotate slightly on hover (nice micro-interaction) */
+.send_btn i{
+  transition: transform .2s ease;
+}
+.send_btn:hover i{ transform: translateX(2px) rotate(-8deg); }
+
+/* ============== RESPONSIVE ============== */
+@media (max-width: 576px){
+  .card{ height: 100vh; border-radius: 0; }
+  .msg_cotainer, .msg_cotainer_send{ max-width: 86%; font-size: .94rem; }
+  .user_img, .user_img_msg{ height: 38px; width: 38px; }
+  .card-header, .card-footer{ padding:.75rem .85rem; }
+}
+
+/* ============== NICE EXTRAS (SAFE DEFAULTS) ============== */
+/* Subtle focus ring for accessibility on clickable items */
+button:focus, .send_btn:focus{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,185,0,.35);
+}
+
+/* Smooth fonts */
+*{ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Prevent content being hidden behind timestamps on long threads */
+.msg_card_body{ padding-bottom: 2.25rem; }
+
+/* Optional "typing" pulse style (hook it up in JS if you want) */
+.typing{
+  display:inline-flex; gap:6px; align-items:center;
+}
+.typing .dot{
+  width:6px; height:6px; border-radius:50%; background: rgba(255,255,255,.8);
+  animation: blink 1s infinite ease-in-out;
+}
+.typing .dot:nth-child(2){ animation-delay: .15s; }
+.typing .dot:nth-child(3){ animation-delay: .3s; }
+@keyframes blink{ 0%,80%,100%{opacity:.25} 40%{opacity:1} }
