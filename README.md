@@ -59,7 +59,7 @@ flowchart LR
 ```
 
 **Components**
-- **Flask API** (`app.py`): Exposes endpoints (e.g., `/recommend`) and handles request/response.
+- **Flask API** (`app.py`): Exposes endpoints (e.g., `/metrics`) and handles request/response.
 - **Recommendation Engine** (`src/`): Embedding generation, similarity scoring, ranking logic.
 - **Data** (`data/flipkart/`): Sample Flipkart-like catalog and metadata.
 - **Database**: **AstraDB** stores product metadata and vector embeddings.
